@@ -2,7 +2,7 @@
 
 A free native Windows photo viewer by **Prosper Technologies**. View your photos, crop and adjust them, and prepare them for sharing in one app.
 
-**[Visit the website](https://ProsperTechnology.github.io/frameswift/)** · **[Download for Windows](https://github.com/ProsperTechnology/frameswift/releases/tag/v1.2.0)**
+**[Visit the website](https://ProsperTechnology.github.io/frameswift/)** · **[Download for Windows](https://github.com/ProsperTechnology/frameswift/releases/tag/v1.2.1)**
 
 ![FrameSwift native Windows photo viewer](docs/assets/viewer.png)
 
@@ -17,7 +17,7 @@ A free native Windows photo viewer by **Prosper Technologies**. View your photos
 | Fullscreen and slideshow | Before/after and undo/redo | Telegram bots |
 | Light/dark appearance | Full-resolution JPEG/PNG copies | Review before publishing |
 
-## Preview 1.2.0
+## Preview 1.2.1
 
 New sharing workspace: destination tiles, framing preview, caption counts, account status, image descriptions, disconnect, and final review. Switching platforms preserves your caption draft.
 
@@ -38,7 +38,7 @@ Windows 10 version 2004 or later, x64. Windows 11 is the primary test platform. 
 
 ### Know what is included
 
-The current build is an early preview. Live social publishing still needs broader verification. Instagram and Facebook now have destination tiles, prepared developer API adapters, and a save-photo/open-website handoff. Public Meta sign-in is not configured. Facebook API publishing targets Pages; Instagram requires a professional account linked to a Page and a hosted prepared JPEG. See [Meta setup](docs/meta-setup.txt). X and other social networks remain unconnected. RAW, SVG, animated playback, and multipage navigation are not included. See the release notes for complete limits.
+The current build is an early preview. Live social publishing still needs broader verification. Instagram and Facebook now have destination tiles, prepared developer API adapters, and a save-photo/open-website handoff. Public Meta sign-in is not configured. Facebook API publishing targets Pages; Instagram requires a professional account linked to a Page and a hosted prepared JPEG. See [Meta setup](docs/meta-setup.txt). X.com now has a caption-prefilled browser handoff and a prepared direct-publishing adapter. Public X sign-in is not configured. See [X setup](docs/x-setup.txt). Other social networks remain unconnected. RAW, SVG, animated playback, and multipage navigation are not included. See the release notes for complete limits.
 
 Photos stay on your PC until you approve a social publication. FrameSwift has no analytics, ads, or cloud account. Social connections stay in memory and clear on exit.
 

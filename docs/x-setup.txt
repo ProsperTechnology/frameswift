@@ -1,0 +1,77 @@
+FrameSwift 1.2.1 — X.com sharing setup
+Prosper Technologies
+
+EVERYDAY SHARING
+1. Open your photo and choose Share → X.com.
+2. Choose the photo shape, check the framing preview, and write your caption.
+3. Choose Save photo & open X, then save the prepared JPEG.
+4. X opens with the caption in its composer. Attach the saved JPEG, check the
+   account/audience, and choose Post on X. FrameSwift does not attach the photo
+   through the browser link or automatically submit the post.
+The caption is sent to x.com in the composer URL when you choose this action.
+This route needs no FrameSwift API token and does not copy text to the clipboard.
+
+DIRECT-PUBLISHING STATUS
+An X API v2 integration is prepared and tested with simulated HTTP responses.
+Public X sign-in is NOT configured. No FrameSwift X app credentials, purchased
+API access, or usage allowance are included. No live X post has been tested.
+The preview supports one JPEG, caption, and optional image description. Video,
+GIF animation, multiple-image posts, threads, scheduling, and Premium long posts
+are not implemented. The editor caps captions at 280 UTF-16 text units for X;
+X's own Unicode/URL counting rules may reject some drafts under that count.
+No draft text is truncated merely by switching destinations.
+
+DEVELOPER TESTING
+1. Create/configure an X developer app for Prosper Technologies through the
+   X Developer Console. Check the current endpoint access, limits, credits,
+   and pricing in your account. FrameSwift does not buy API credits.
+2. Enable OAuth 2.0 user authentication. Obtain an authorized USER access token
+   with users.read, tweet.read, tweet.write, and media.write. An app-only
+   bearer token cannot publish as a user. Do not use a password or client secret.
+3. In FrameSwift Share → X.com, expand Accessibility & advanced setup and
+   choose Connect X test account. Enter that token and verify the displayed
+   @handle. The token remains in process memory only.
+4. Prepare your photo and caption. Add an image description if desired.
+5. Choose Review X post. Check the image, caption, account, description, and
+   audience information. Only Publish to X sends upload/publish requests.
+6. If confirmed, use View your post. If publication is uncertain, check your
+   profile before creating another draft. FrameSwift does not automatically
+   repeat the final create-post request.
+
+IMPLEMENTED REQUEST FLOW
+- GET https://api.x.com/2/users/me verifies the user-context token and handle.
+- POST /2/media/upload sends the JPEG base64 in JSON with tweet_image category.
+- Pending image processing is polled with bounded waits; failed or unknown
+  readiness prevents publication.
+- POST /2/media/metadata sends optional accessibility text before publication.
+- POST /2/tweets attaches the uploaded media ID and caption.
+- A returned numeric post ID creates a View your post link at x.com/i/status/ID.
+Tokens are sent only in Authorization headers to api.x.com, not query strings.
+Error response bodies are not displayed or logged. Local disconnect clears
+the connection; closing FrameSwift clears all local social sessions.
+
+PUBLIC CONNECT WITH X — REMAINING OWNER WORK
+1. Register and configure the production X app, required access and permissions.
+2. Provide accurate privacy/data-deletion information for the final service.
+3. Implement and acceptance-test OAuth 2.0 authorization-code flow with PKCE,
+   state validation, registered redirect URIs, cancellation, and expiry handling.
+   A native public client must never embed a client secret. A confidential
+   web client must exchange tokens on a secure hosted service.
+4. Connect the approved app's public client configuration to FrameSwift. This
+   preview intentionally does not display a fake public Connect with X login.
+5. Test real account connection, user verification, image upload/readiness,
+   descriptions, caption counting, posting, receipts, insufficient credits,
+   rate limits, revocation, timeout/duplicate handling, and disconnect.
+6. Request offline.access only if implementing refresh-token storage/rotation;
+   this preview neither stores nor automatically refreshes X sessions.
+
+OFFICIAL REFERENCES
+https://docs.x.com/fundamentals/authentication/oauth-2-0/authorization-code
+https://docs.x.com/x-api/media/upload-media
+https://docs.x.com/x-api/media/get-media-upload-status
+https://docs.x.com/x-api/media/create-media-metadata
+https://docs.x.com/x-api/posts/create-post
+https://docs.x.com/openapi.json
+
+X's API access and pricing are external to the free FrameSwift app. Check
+current terms and access before authorizing a real-account publishing test.
