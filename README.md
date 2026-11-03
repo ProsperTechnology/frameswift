@@ -8,7 +8,7 @@ A free native Windows photo viewer by **Prosper Technologies**. View your photos
 
 **View. Fine-tune. Share.** A photo-first workspace for your Windows desktop.
 
-![Guided sharing with Instagram and Facebook destinations](docs/assets/sharing.png)
+![Guided sharing with X.com, Instagram, and Facebook destinations](docs/assets/sharing.png)
 
 | View | Edit | Share |
 | --- | --- | --- |
@@ -18,6 +18,8 @@ A free native Windows photo viewer by **Prosper Technologies**. View your photos
 | Light/dark appearance | Full-resolution JPEG/PNG copies | Review before publishing |
 
 ## Preview 1.2.1
+
+**New: X.com sharing.** Save a prepared photo and open X with the caption prefilled, then attach the photo and post on X. The prepared direct API adapter requires developer setup; public X sign-in is not configured.
 
 New sharing workspace: destination tiles, framing preview, caption counts, account status, image descriptions, disconnect, and final review. Switching platforms preserves your caption draft.
 
