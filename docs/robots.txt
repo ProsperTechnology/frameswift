@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ProsperTechnology.github.io/frameswift/sitemap.xml
