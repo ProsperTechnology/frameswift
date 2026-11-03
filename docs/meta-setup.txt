@@ -1,0 +1,122 @@
+FrameSwift 1.2 — Instagram and Facebook publishing setup
+Prosper Technologies
+
+STATUS
+This preview contains Facebook Page and Instagram professional-account API
+adapters with offline contract tests. It does NOT contain a registered public
+Meta app, approved permissions, a hosted sign-in service, or a media-hosting
+service. Do not describe the current developer connection as public sign-in.
+No live Meta authentication or publication has been verified for this release.
+
+FOR EVERYDAY USERS, TODAY
+1. Open a photo and choose Share.
+2. Choose Instagram or Facebook. Adjust the shape and preview the framing.
+3. Use Save photo & open Instagram/Facebook.
+4. Pick the saved JPEG in that website's photo composer and finish the post there.
+   FrameSwift does not fill the website's caption or publish on your behalf.
+   Your caption draft remains in FrameSwift while the app stays open.
+
+ACCOUNT SUPPORT
+- Facebook direct publishing posts as a Page you manage, not a personal profile.
+- This Instagram adapter uses Instagram API with Facebook Login: a Business or
+  Creator account linked to a Facebook Page. Personal accounts are not supported.
+- Single feed photos only. Reels, stories, carousels, scheduling, and ads are not
+  implemented. Selecting story size for Instagram switches to portrait feed size.
+
+DEVELOPER TESTING WITH YOUR OWN META APP
+1. Create a Meta developer app for Prosper Technologies and add the appropriate
+   Facebook Login/Instagram use cases in Meta's current app dashboard.
+2. Link the Instagram Business/Creator account to a Facebook Page you manage.
+3. Give the tester a role on the app and the destination assets as required by
+   Meta's development-mode rules. Follow Meta's dashboard instructions.
+4. Obtain a Page access token from your own authorized Meta app. Facebook photo
+   publishing requires pages_manage_posts, pages_read_engagement, and relevant
+   Page access; Page discovery may require pages_show_list. The Instagram flow
+   requires instagram_basic, instagram_content_publish, pages_read_engagement,
+   and pages_show_list for Page discovery. Request only scopes actually used.
+   Some Business Manager arrangements require additional permissions. Check
+   the current Meta docs/dashboard for your asset configuration.
+5. In FrameSwift Share, choose Facebook or Instagram. Expand Accessibility &
+   advanced setup, then choose Connect developer test account.
+6. Enter the numeric FACEBOOK PAGE ID and its PAGE ACCESS TOKEN. For Instagram,
+   FrameSwift discovers the linked professional account and verifies its name
+   and account type. It never asks for a Facebook/Instagram password or app secret.
+7. Review the verified Post as destination. Connection verification does not
+   guarantee that publishing permissions are granted; Meta checks them on post.
+
+INSTAGRAM IMAGE HOSTING FOR DEVELOPER TESTS
+Meta fetches image bytes from a public URL; a local Windows file cannot serve
+as image_url. This preview does not upload your photo to a third-party host.
+1. Set the shape and framing, then Save prepared JPEG for hosting.
+2. Upload that exact JPEG to an HTTPS media host you control. The address must
+   return image/jpeg without authentication or redirects. Keep it available
+   while Meta fetches/processes it. Protect/delete it according to your policy.
+3. Enter that address under Hosted prepared JPEG URL.
+4. Review post, confirm the photo/caption/account, then choose Publish.
+FrameSwift downloads the JPEG without sending Meta tokens to its host and
+checks its SHA-256 against the full-resolution prepared photo. An altered,
+recompressed, or different image is rejected. Changing photo edits or framing
+requires another saved/hosted JPEG. Captions can change without another upload.
+Do not use a private photo on a public host without the owner's authorization.
+Short-lived, unguessable media URLs are appropriate for a production service.
+
+FACEBOOK DEVELOPER PUBLISHING
+FrameSwift sends the prepared JPEG directly to /PAGE_ID/photos as multipart
+source, caption, published=true, and alt_text_custom where provided. It posts
+as the Page. No external image host is needed for Facebook.
+
+INSTAGRAM DEVELOPER PUBLISHING
+FrameSwift verifies the prepared hosted JPEG, creates /IG_ID/media with
+image_url/caption/alt_text, checks the container's status_code, then calls
+/IG_ID/media_publish only after FINISHED. It reads the resulting permalink
+when available. Graph API v24.0 is pinned in the adapter; review it when updating.
+Container creation/processing alone does not publish. If publishing times out,
+the result can be uncertain: check your account before preparing another post.
+FrameSwift does not automatically repeat an uncertain Meta publish request.
+
+PUBLIC RELEASE SETUP — OWNER CHECKLIST
+This is the remaining work for a normal Connect with Facebook/Instagram button:
+1. Register the production Meta app under Prosper Technologies.
+2. Provide public privacy policy and user-data-deletion instructions/callbacks
+   that accurately describe the final service. The current static download
+   website does not receive social tokens or run an OAuth callback.
+3. Implement a hosted HTTPS OAuth service with server-side token exchange.
+   Keep the Meta app secret in the server's secret storage, never in a desktop
+   executable, GitHub Pages JavaScript, repository, or installer.
+4. Restrict exact redirect URIs; validate OAuth state and bind every login to
+   its initiating desktop session. Use short-lived single-use session tickets
+   for desktop handoff. Do not return tokens in URL query strings or logs.
+5. Show an account/Page selector after permission consent. Request the minimum
+   publishing scopes. Handle refusal, expired/revoked tokens, and disconnect.
+6. For Instagram, add an authenticated media-staging service for the prepared
+   JPEG. Use short-lived unguessable URLs, size/type checks, expiry, deletion,
+   authorization, and a stated retention policy. Obtain consent before upload.
+7. Complete required business verification, app review, and Advanced Access
+   for the permissions and audience shown by Meta's current dashboard. Submit
+   a working demo/screencast and reviewer instructions using test assets.
+8. Add owner-managed HTTPS sign-in/service configuration to FrameSwift after
+   deployment. The current app intentionally has no fake public Connect login.
+9. Test real accounts: login/cancel, Page/professional-account selection, photo
+   upload, caption/alt text, publish, receipt/permalink, expiry/revocation,
+   network interruption, duplicate prevention, and cleanup of staged media.
+10. Only advertise public Meta direct publishing after that acceptance test.
+
+TOKEN HANDLING
+Developer tokens are held only in memory and sent as Bearer authorization to
+graph.facebook.com. They are cleared on local disconnect or app exit. They are
+not stored in preferences/recovery. Revoke remote access through Meta as needed.
+Image-host verification sends no Meta authorization header. Service errors are
+reported without echoing response bodies or tokens.
+
+OFFICIAL REFERENCES
+Meta's official Instagram collection (account requirements, permissions,
+Page discovery, container processing and publication):
+https://www.postman.com/meta/instagram/documentation/6yqw8pt/instagram-api
+https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/content-publishing/
+Facebook Page photos:
+https://developers.facebook.com/docs/graph-api/reference/page/photos/
+App review:
+https://developers.facebook.com/docs/app-review/
+
+Platform requirements change. Recheck the official dashboard and docs before
+submitting for review. The adapters and tests are preparation, not Meta approval.
