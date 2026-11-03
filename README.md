@@ -4,6 +4,17 @@ A free native Windows photo viewer by **Prosper Technologies**. View your photos
 
 **[Visit the website](https://ProsperTechnology.github.io/frameswift/)** · **[Download for Windows](https://github.com/ProsperTechnology/frameswift/releases/tag/v1.1.1)**
 
+![FrameSwift native Windows photo viewer](docs/assets/viewer.png)
+
+**View. Fine-tune. Share.** A photo-first workspace for your Windows desktop.
+
+| View | Edit | Share |
+| --- | --- | --- |
+| Folder browsing and thumbnails | Freeform and preset crops | Bluesky and Mastodon |
+| Fit, 100%, zoom, and pan | Auto Adjust and image adjustments | Discord channel webhooks |
+| Fullscreen and slideshow | Before/after and undo/redo | Telegram bots |
+| Light/dark appearance | Full-resolution JPEG/PNG copies | Review before publishing |
+
 ## Preview 1.1.1
 
 - Fullscreen viewing, folder browsing, thumbnails, zoom, pan, and slideshow.
@@ -13,6 +24,19 @@ A free native Windows photo viewer by **Prosper Technologies**. View your photos
 - Direct sharing integrations for Bluesky, Mastodon, Discord webhooks, and Telegram bots. Live account publishing still requires broader verification.
 
 Windows 10 version 2004 or later, x64. Windows 11 is the primary test platform. This preview installer is unsigned. Optional formats depend on Windows codecs. GIF/TIFF display the first frame/page.
+
+## Get started
+
+1. Download the x64 installer from the release page.
+2. Run setup, then open FrameSwift from Start or the desktop shortcut.
+3. Open a photo or folder. Choose **Make default** when prompted if you want to select FrameSwift in Windows Default apps.
+4. Use **Save copy** after editing to keep your source photo unchanged.
+
+### Know what is included
+
+The current build is an early preview. Live social publishing still needs broader verification. Instagram, Facebook, X, and other social networks are not connected. RAW, SVG, animated playback, and multipage navigation are not included. See the release notes for complete limits.
+
+Photos stay on your PC until you approve a social publication. FrameSwift has no analytics, ads, or cloud account. Social connections stay in memory and clear on exit.
 
 ## Download verification
 
